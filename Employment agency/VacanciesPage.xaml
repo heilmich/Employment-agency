@@ -1,0 +1,56 @@
+﻿<Page x:Class="Employment_agency.VacanciesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Employment_agency"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VacanciesPage">
+    <Page.Resources>
+        <local:ImageConverter x:Key="ImageConverter"/>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="Auto" Padding="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" >
+                        <Grid Width="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="100" Width="1.5*"/>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition MinWidth="50"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Top">
+                                <Image Source="{Binding Организация.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}" MaxHeight="150"/>
+                                <TextBlock Text="{Binding Организация.Название}" TextWrapping="Wrap" FontSize="12"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Name="spVacancy" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding Название}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Описание}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="Margin" Value="5"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</Page>

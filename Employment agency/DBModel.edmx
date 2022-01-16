@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Аккаунт">
+          <Key>
+            <PropertyRef Name="Код_аккаунта" />
+          </Key>
+          <Property Name="Код_аккаунта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Фотография" Type="nvarchar(max)" />
+          <Property Name="Тип_аккаунта" Type="int" />
+        </EntityType>
+        <EntityType Name="Вакансия">
+          <Key>
+            <PropertyRef Name="Код_вакансии" />
+          </Key>
+          <Property Name="Код_вакансии" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Должность" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Базовый_оклад" Type="money" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+          <Property Name="Требование" Type="nvarchar(max)" />
+          <Property Name="Код_организации" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Организация">
+          <Key>
+            <PropertyRef Name="Код_Организации" />
+          </Key>
+          <Property Name="Код_Организации" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Номер_телефона" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Код_аккаунта" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Резюме">
+          <Key>
+            <PropertyRef Name="Код_резюме" />
+          </Key>
+          <Property Name="Код_резюме" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Желаемая_должность" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Образование" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Последнее_место_работы" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Стаж_работы" Type="int" Nullable="false" />
+          <Property Name="О_себе" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Код_соискателя" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Соискатель">
+          <Key>
+            <PropertyRef Name="Код_Соискателя" />
+          </Key>
+          <Property Name="Код_Соискателя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Возраст" Type="int" Nullable="false" />
+          <Property Name="Код_аккаунта" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Тип_аккаунта">
+          <Key>
+            <PropertyRef Name="Код_типа" />
+          </Key>
+          <Property Name="Код_типа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_типа" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Аккаунт_Тип_аккаунта">
+          <End Role="Тип_аккаунта" Type="Self.Тип_аккаунта" Multiplicity="0..1" />
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_аккаунта">
+              <PropertyRef Name="Код_типа" />
+            </Principal>
+            <Dependent Role="Аккаунт">
+              <PropertyRef Name="Тип_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Вакансии_Организация">
+          <End Role="Организация" Type="Self.Организация" Multiplicity="1" />
+          <End Role="Вакансия" Type="Self.Вакансия" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Организация">
+              <PropertyRef Name="Код_Организации" />
+            </Principal>
+            <Dependent Role="Вакансия">
+              <PropertyRef Name="Код_организации" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Организация_Аккаунт">
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="1" />
+          <End Role="Организация" Type="Self.Организация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Аккаунт">
+              <PropertyRef Name="Код_аккаунта" />
+            </Principal>
+            <Dependent Role="Организация">
+              <PropertyRef Name="Код_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Резюме_Соискатель">
+          <End Role="Соискатель" Type="Self.Соискатель" Multiplicity="1" />
+          <End Role="Резюме" Type="Self.Резюме" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Соискатель">
+              <PropertyRef Name="Код_Соискателя" />
+            </Principal>
+            <Dependent Role="Резюме">
+              <PropertyRef Name="Код_соискателя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Соискатель_Аккаунт">
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="1" />
+          <End Role="Соискатель" Type="Self.Соискатель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Аккаунт">
+              <PropertyRef Name="Код_аккаунта" />
+            </Principal>
+            <Dependent Role="Соискатель">
+              <PropertyRef Name="Код_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DBModelContainer">
+          <EntitySet Name="Аккаунт" EntityType="Self.Аккаунт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Вакансия" EntityType="Self.Вакансия" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Организация" EntityType="Self.Организация" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Резюме" EntityType="Self.Резюме" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Соискатель" EntityType="Self.Соискатель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тип_аккаунта" EntityType="Self.Тип_аккаунта" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Аккаунт_Тип_аккаунта" Association="Self.FK_Аккаунт_Тип_аккаунта">
+            <End Role="Тип_аккаунта" EntitySet="Тип_аккаунта" />
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Вакансии_Организация" Association="Self.FK_Вакансии_Организация">
+            <End Role="Организация" EntitySet="Организация" />
+            <End Role="Вакансия" EntitySet="Вакансия" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Организация_Аккаунт" Association="Self.FK_Организация_Аккаунт">
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+            <End Role="Организация" EntitySet="Организация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Резюме_Соискатель" Association="Self.FK_Резюме_Соискатель">
+            <End Role="Соискатель" EntitySet="Соискатель" />
+            <End Role="Резюме" EntitySet="Резюме" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Соискатель_Аккаунт" Association="Self.FK_Соискатель_Аккаунт">
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+            <End Role="Соискатель" EntitySet="Соискатель" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Аккаунт">
+          <Key>
+            <PropertyRef Name="Код_аккаунта" />
+          </Key>
+          <Property Name="Код_аккаунта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Тип_аккаунта" Type="Int32" />
+          <NavigationProperty Name="Тип_аккаунта1" Relationship="Self.FK_Аккаунт_Тип_аккаунта" FromRole="Аккаунт" ToRole="Тип_аккаунта" />
+          <NavigationProperty Name="Организация" Relationship="Self.FK_Организация_Аккаунт" FromRole="Аккаунт" ToRole="Организация" />
+          <NavigationProperty Name="Соискатель" Relationship="Self.FK_Соискатель_Аккаунт" FromRole="Аккаунт" ToRole="Соискатель" />
+          <Property Name="Фотография" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Вакансия">
+          <Key>
+            <PropertyRef Name="Код_вакансии" />
+          </Key>
+          <Property Name="Код_вакансии" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Базовый_оклад" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Требование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Код_организации" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Организация" Relationship="Self.FK_Вакансии_Организация" FromRole="Вакансия" ToRole="Организация" />
+        </EntityType>
+        <EntityType Name="Организация">
+          <Key>
+            <PropertyRef Name="Код_Организации" />
+          </Key>
+          <Property Name="Код_Организации" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код_аккаунта" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Аккаунт" Relationship="Self.FK_Организация_Аккаунт" FromRole="Организация" ToRole="Аккаунт" />
+          <NavigationProperty Name="Вакансия" Relationship="Self.FK_Вакансии_Организация" FromRole="Организация" ToRole="Вакансия" />
+        </EntityType>
+        <EntityType Name="Резюме">
+          <Key>
+            <PropertyRef Name="Код_резюме" />
+          </Key>
+          <Property Name="Код_резюме" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Желаемая_должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Образование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Последнее_место_работы" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Стаж_работы" Type="Int32" Nullable="false" />
+          <Property Name="О_себе" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код_соискателя" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Соискатель" Relationship="Self.FK_Резюме_Соискатель" FromRole="Резюме" ToRole="Соискатель" />
+        </EntityType>
+        <EntityType Name="Соискатель">
+          <Key>
+            <PropertyRef Name="Код_Соискателя" />
+          </Key>
+          <Property Name="Код_Соискателя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Возраст" Type="Int32" Nullable="false" />
+          <Property Name="Код_аккаунта" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Аккаунт" Relationship="Self.FK_Соискатель_Аккаунт" FromRole="Соискатель" ToRole="Аккаунт" />
+          <NavigationProperty Name="Резюме" Relationship="Self.FK_Резюме_Соискатель" FromRole="Соискатель" ToRole="Резюме" />
+        </EntityType>
+        <EntityType Name="Тип_аккаунта">
+          <Key>
+            <PropertyRef Name="Код_типа" />
+          </Key>
+          <Property Name="Код_типа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_типа" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Аккаунт" Relationship="Self.FK_Аккаунт_Тип_аккаунта" FromRole="Тип_аккаунта" ToRole="Аккаунт" />
+        </EntityType>
+        <Association Name="FK_Аккаунт_Тип_аккаунта">
+          <End Role="Тип_аккаунта" Type="Self.Тип_аккаунта" Multiplicity="0..1" />
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_аккаунта">
+              <PropertyRef Name="Код_типа" />
+            </Principal>
+            <Dependent Role="Аккаунт">
+              <PropertyRef Name="Тип_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Организация_Аккаунт">
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="1" />
+          <End Role="Организация" Type="Self.Организация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Аккаунт">
+              <PropertyRef Name="Код_аккаунта" />
+            </Principal>
+            <Dependent Role="Организация">
+              <PropertyRef Name="Код_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Соискатель_Аккаунт">
+          <End Role="Аккаунт" Type="Self.Аккаунт" Multiplicity="1" />
+          <End Role="Соискатель" Type="Self.Соискатель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Аккаунт">
+              <PropertyRef Name="Код_аккаунта" />
+            </Principal>
+            <Dependent Role="Соискатель">
+              <PropertyRef Name="Код_аккаунта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Вакансии_Организация">
+          <End Role="Организация" Type="Self.Организация" Multiplicity="1" />
+          <End Role="Вакансия" Type="Self.Вакансия" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Организация">
+              <PropertyRef Name="Код_Организации" />
+            </Principal>
+            <Dependent Role="Вакансия">
+              <PropertyRef Name="Код_организации" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Резюме_Соискатель">
+          <End Role="Соискатель" Type="Self.Соискатель" Multiplicity="1" />
+          <End Role="Резюме" Type="Self.Резюме" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Соискатель">
+              <PropertyRef Name="Код_Соискателя" />
+            </Principal>
+            <Dependent Role="Резюме">
+              <PropertyRef Name="Код_соискателя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Аккаунт" EntityType="Self.Аккаунт" />
+          <EntitySet Name="Вакансия" EntityType="Self.Вакансия" />
+          <EntitySet Name="Организация" EntityType="Self.Организация" />
+          <EntitySet Name="Резюме" EntityType="Self.Резюме" />
+          <EntitySet Name="Соискатель" EntityType="Self.Соискатель" />
+          <EntitySet Name="Тип_аккаунта" EntityType="Self.Тип_аккаунта" />
+          <AssociationSet Name="FK_Аккаунт_Тип_аккаунта" Association="Self.FK_Аккаунт_Тип_аккаунта">
+            <End Role="Тип_аккаунта" EntitySet="Тип_аккаунта" />
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Организация_Аккаунт" Association="Self.FK_Организация_Аккаунт">
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+            <End Role="Организация" EntitySet="Организация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Соискатель_Аккаунт" Association="Self.FK_Соискатель_Аккаунт">
+            <End Role="Аккаунт" EntitySet="Аккаунт" />
+            <End Role="Соискатель" EntitySet="Соискатель" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Вакансии_Организация" Association="Self.FK_Вакансии_Организация">
+            <End Role="Организация" EntitySet="Организация" />
+            <End Role="Вакансия" EntitySet="Вакансия" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Резюме_Соискатель" Association="Self.FK_Резюме_Соискатель">
+            <End Role="Соискатель" EntitySet="Соискатель" />
+            <End Role="Резюме" EntitySet="Резюме" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Аккаунт">
+            <EntityTypeMapping TypeName="DBModel.Аккаунт">
+              <MappingFragment StoreEntitySet="Аккаунт">
+                <ScalarProperty Name="Фотография" ColumnName="Фотография" />
+                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Тип_аккаунта" ColumnName="Тип_аккаунта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Вакансия">
+            <EntityTypeMapping TypeName="DBModel.Вакансия">
+              <MappingFragment StoreEntitySet="Вакансия">
+                <ScalarProperty Name="Код_вакансии" ColumnName="Код_вакансии" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Базовый_оклад" ColumnName="Базовый_оклад" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Требование" ColumnName="Требование" />
+                <ScalarProperty Name="Код_организации" ColumnName="Код_организации" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Организация">
+            <EntityTypeMapping TypeName="DBModel.Организация">
+              <MappingFragment StoreEntitySet="Организация">
+                <ScalarProperty Name="Код_Организации" ColumnName="Код_Организации" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Резюме">
+            <EntityTypeMapping TypeName="DBModel.Резюме">
+              <MappingFragment StoreEntitySet="Резюме">
+                <ScalarProperty Name="Код_резюме" ColumnName="Код_резюме" />
+                <ScalarProperty Name="Желаемая_должность" ColumnName="Желаемая_должность" />
+                <ScalarProperty Name="Образование" ColumnName="Образование" />
+                <ScalarProperty Name="Последнее_место_работы" ColumnName="Последнее_место_работы" />
+                <ScalarProperty Name="Стаж_работы" ColumnName="Стаж_работы" />
+                <ScalarProperty Name="О_себе" ColumnName="О_себе" />
+                <ScalarProperty Name="Код_соискателя" ColumnName="Код_соискателя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Соискатель">
+            <EntityTypeMapping TypeName="DBModel.Соискатель">
+              <MappingFragment StoreEntitySet="Соискатель">
+                <ScalarProperty Name="Код_Соискателя" ColumnName="Код_Соискателя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Возраст" ColumnName="Возраст" />
+                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_аккаунта">
+            <EntityTypeMapping TypeName="DBModel.Тип_аккаунта">
+              <MappingFragment StoreEntitySet="Тип_аккаунта">
+                <ScalarProperty Name="Код_типа" ColumnName="Код_типа" />
+                <ScalarProperty Name="Название_типа" ColumnName="Название_типа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
