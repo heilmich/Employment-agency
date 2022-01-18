@@ -54,7 +54,7 @@
                 <ListView Name="lvResume" Grid.Row="1" Margin="7, 10" VerticalAlignment="Stretch">
                     
                 </ListView>
-                <Button Grid.Row="2" Style="{DynamicResource ButtonStyle}" Height="22" Content="Добавить" Width="120"/>
+                <Button Grid.Row="2" Style="{DynamicResource ButtonStyle}" Height="22" Content="Добавить" Width="120" Click="Click_addResume"/>
             </Grid>  
         </Border>
     </Grid>

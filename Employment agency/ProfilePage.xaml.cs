@@ -29,5 +29,10 @@ namespace Employment_agency
             lvResume.ItemsSource = currentUser.Резюме;
 
         }
+
+        private void Click_addResume(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

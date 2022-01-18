@@ -46,6 +46,7 @@ namespace Employment_agency
     {
         public Аккаунт currentAcc = new Аккаунт();
         public Соискатель currentUser = new Соискатель();
+        ResumesPage resumesPage;
         VacanciesPage vacanciesPage;
         ProfilePage profilePage;
 
@@ -58,8 +59,14 @@ namespace Employment_agency
             
             profilePage = new ProfilePage(acc);
             vacanciesPage = new VacanciesPage();
+            resumesPage = new ResumesPage();
 
             MainFrame.Navigate(profilePage);
+        }
+
+        public void Navigate(Page page) 
+        {
+            MainFrame.Navigate(page);
         }
 
         private void Click_labelVacancies(object sender, MouseButtonEventArgs e)
@@ -85,5 +92,12 @@ namespace Employment_agency
             img.Freeze();
             return img;
         }
+
+        private void Click_labelResumes(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(resumesPage);
+        }
     }
+
+
 }

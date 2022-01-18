@@ -18,6 +18,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Label Content="Резюме" Foreground="#3C4247" MouseLeftButtonUp="Click_labelResumes" />
             <Label Content="Вакансии" Foreground="#3C4247" MouseLeftButtonUp="Click_labelVacancies" />
             <Image Source="placeholderuser.png" Height="25" MouseLeftButtonUp="Click_imageProfile"/>
         </StackPanel>
