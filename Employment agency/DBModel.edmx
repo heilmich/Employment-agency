@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище employmentofficeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Аккаунт">
           <Key>
             <PropertyRef Name="Код_аккаунта" />
@@ -20,21 +20,24 @@
             <PropertyRef Name="Код_вакансии" />
           </Key>
           <Property Name="Код_вакансии" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_организации" Type="int" Nullable="false" />
           <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Должность" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Базовый_оклад" Type="money" Nullable="false" />
           <Property Name="Описание" Type="nvarchar(max)" />
           <Property Name="Требование" Type="nvarchar(max)" />
-          <Property Name="Код_организации" Type="int" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Организация">
           <Key>
             <PropertyRef Name="Код_Организации" />
           </Key>
           <Property Name="Код_Организации" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Номер_телефона" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Код_аккаунта" Type="int" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Номер_телефона" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="500" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Резюме">
           <Key>
@@ -42,7 +45,6 @@
           </Key>
           <Property Name="Код_резюме" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Желаемая_должность" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Образование" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Последнее_место_работы" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Стаж_работы" Type="int" Nullable="false" />
           <Property Name="О_себе" Type="nvarchar(max)" Nullable="false" />
@@ -53,11 +55,14 @@
             <PropertyRef Name="Код_Соискателя" />
           </Key>
           <Property Name="Код_Соискателя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_аккаунта" Type="int" Nullable="false" />
           <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Возраст" Type="int" Nullable="false" />
-          <Property Name="Код_аккаунта" Type="int" Nullable="false" />
+          <Property Name="Образование" Type="nvarchar" MaxLength="200" />
+          <Property Name="Номер_телефона" Type="nvarchar" MaxLength="20" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Тип_аккаунта">
           <Key>
@@ -126,7 +131,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище DBModelContainer">
+        <EntityContainer Name="Хранилище employmentofficeModelContainer">
           <EntitySet Name="Аккаунт" EntityType="Self.Аккаунт" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Вакансия" EntityType="Self.Вакансия" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Организация" EntityType="Self.Организация" Schema="dbo" store:Type="Tables" />
@@ -157,7 +162,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="employmentofficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Аккаунт">
           <Key>
             <PropertyRef Name="Код_аккаунта" />
@@ -165,23 +170,24 @@
           <Property Name="Код_аккаунта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Фотография" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Тип_аккаунта" Type="Int32" />
           <NavigationProperty Name="Тип_аккаунта1" Relationship="Self.FK_Аккаунт_Тип_аккаунта" FromRole="Аккаунт" ToRole="Тип_аккаунта" />
           <NavigationProperty Name="Организация" Relationship="Self.FK_Организация_Аккаунт" FromRole="Аккаунт" ToRole="Организация" />
           <NavigationProperty Name="Соискатель" Relationship="Self.FK_Соискатель_Аккаунт" FromRole="Аккаунт" ToRole="Соискатель" />
-          <Property Name="Фотография" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Вакансия">
           <Key>
             <PropertyRef Name="Код_вакансии" />
           </Key>
           <Property Name="Код_вакансии" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_организации" Type="Int32" Nullable="false" />
           <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Базовый_оклад" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Требование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Код_организации" Type="Int32" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Организация" Relationship="Self.FK_Вакансии_Организация" FromRole="Вакансия" ToRole="Организация" />
         </EntityType>
         <EntityType Name="Организация">
@@ -189,9 +195,11 @@
             <PropertyRef Name="Код_Организации" />
           </Key>
           <Property Name="Код_Организации" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Код_аккаунта" Type="Int32" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Аккаунт" Relationship="Self.FK_Организация_Аккаунт" FromRole="Организация" ToRole="Аккаунт" />
           <NavigationProperty Name="Вакансия" Relationship="Self.FK_Вакансии_Организация" FromRole="Организация" ToRole="Вакансия" />
         </EntityType>
@@ -201,7 +209,6 @@
           </Key>
           <Property Name="Код_резюме" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Желаемая_должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Образование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Последнее_место_работы" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Стаж_работы" Type="Int32" Nullable="false" />
           <Property Name="О_себе" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -213,11 +220,14 @@
             <PropertyRef Name="Код_Соискателя" />
           </Key>
           <Property Name="Код_Соискателя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_аккаунта" Type="Int32" Nullable="false" />
           <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Возраст" Type="Int32" Nullable="false" />
-          <Property Name="Код_аккаунта" Type="Int32" Nullable="false" />
+          <Property Name="Образование" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Аккаунт" Relationship="Self.FK_Соискатель_Аккаунт" FromRole="Соискатель" ToRole="Аккаунт" />
           <NavigationProperty Name="Резюме" Relationship="Self.FK_Резюме_Соискатель" FromRole="Соискатель" ToRole="Резюме" />
         </EntityType>
@@ -322,47 +332,49 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище employmentofficeModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Аккаунт">
-            <EntityTypeMapping TypeName="DBModel.Аккаунт">
+            <EntityTypeMapping TypeName="employmentofficeModel.Аккаунт">
               <MappingFragment StoreEntitySet="Аккаунт">
-                <ScalarProperty Name="Фотография" ColumnName="Фотография" />
                 <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
                 <ScalarProperty Name="Логин" ColumnName="Логин" />
                 <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Фотография" ColumnName="Фотография" />
                 <ScalarProperty Name="Тип_аккаунта" ColumnName="Тип_аккаунта" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Вакансия">
-            <EntityTypeMapping TypeName="DBModel.Вакансия">
+            <EntityTypeMapping TypeName="employmentofficeModel.Вакансия">
               <MappingFragment StoreEntitySet="Вакансия">
                 <ScalarProperty Name="Код_вакансии" ColumnName="Код_вакансии" />
+                <ScalarProperty Name="Код_организации" ColumnName="Код_организации" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="Должность" ColumnName="Должность" />
                 <ScalarProperty Name="Базовый_оклад" ColumnName="Базовый_оклад" />
                 <ScalarProperty Name="Описание" ColumnName="Описание" />
                 <ScalarProperty Name="Требование" ColumnName="Требование" />
-                <ScalarProperty Name="Код_организации" ColumnName="Код_организации" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Организация">
-            <EntityTypeMapping TypeName="DBModel.Организация">
+            <EntityTypeMapping TypeName="employmentofficeModel.Организация">
               <MappingFragment StoreEntitySet="Организация">
                 <ScalarProperty Name="Код_Организации" ColumnName="Код_Организации" />
+                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
-                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Резюме">
-            <EntityTypeMapping TypeName="DBModel.Резюме">
+            <EntityTypeMapping TypeName="employmentofficeModel.Резюме">
               <MappingFragment StoreEntitySet="Резюме">
                 <ScalarProperty Name="Код_резюме" ColumnName="Код_резюме" />
                 <ScalarProperty Name="Желаемая_должность" ColumnName="Желаемая_должность" />
-                <ScalarProperty Name="Образование" ColumnName="Образование" />
                 <ScalarProperty Name="Последнее_место_работы" ColumnName="Последнее_место_работы" />
                 <ScalarProperty Name="Стаж_работы" ColumnName="Стаж_работы" />
                 <ScalarProperty Name="О_себе" ColumnName="О_себе" />
@@ -371,19 +383,22 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Соискатель">
-            <EntityTypeMapping TypeName="DBModel.Соискатель">
+            <EntityTypeMapping TypeName="employmentofficeModel.Соискатель">
               <MappingFragment StoreEntitySet="Соискатель">
                 <ScalarProperty Name="Код_Соискателя" ColumnName="Код_Соискателя" />
+                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
                 <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
                 <ScalarProperty Name="Имя" ColumnName="Имя" />
                 <ScalarProperty Name="Отчество" ColumnName="Отчество" />
                 <ScalarProperty Name="Возраст" ColumnName="Возраст" />
-                <ScalarProperty Name="Код_аккаунта" ColumnName="Код_аккаунта" />
+                <ScalarProperty Name="Образование" ColumnName="Образование" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Тип_аккаунта">
-            <EntityTypeMapping TypeName="DBModel.Тип_аккаунта">
+            <EntityTypeMapping TypeName="employmentofficeModel.Тип_аккаунта">
               <MappingFragment StoreEntitySet="Тип_аккаунта">
                 <ScalarProperty Name="Код_типа" ColumnName="Код_типа" />
                 <ScalarProperty Name="Название_типа" ColumnName="Название_типа" />

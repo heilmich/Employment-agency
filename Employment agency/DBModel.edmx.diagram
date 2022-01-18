@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="024a6f08d1314cb494f2345f625876a8" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.Аккаунт" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Вакансия" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Организация" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Резюме" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Соискатель" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Тип_аккаунта" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <AssociationConnector Association="DBModel.FK_Аккаунт_Тип_аккаунта" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Организация_Аккаунт" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Соискатель_Аккаунт" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Вакансии_Организация" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Резюме_Соискатель" ManuallyRouted="false" />
+      <Diagram DiagramId="d4de9a385fe4463da17ca91d36bcede6" Name="Diagram1">
+        <EntityTypeShape EntityType="employmentofficeModel.Аккаунт" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="employmentofficeModel.Вакансия" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="employmentofficeModel.Организация" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="employmentofficeModel.Резюме" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="employmentofficeModel.Соискатель" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="employmentofficeModel.Тип_аккаунта" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="employmentofficeModel.FK_Аккаунт_Тип_аккаунта" ManuallyRouted="false" />
+        <AssociationConnector Association="employmentofficeModel.FK_Организация_Аккаунт" ManuallyRouted="false" />
+        <AssociationConnector Association="employmentofficeModel.FK_Соискатель_Аккаунт" ManuallyRouted="false" />
+        <AssociationConnector Association="employmentofficeModel.FK_Вакансии_Организация" ManuallyRouted="false" />
+        <AssociationConnector Association="employmentofficeModel.FK_Резюме_Соискатель" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

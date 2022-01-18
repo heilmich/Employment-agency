@@ -49,6 +49,7 @@ namespace Employment_agency
         ResumesPage resumesPage;
         VacanciesPage vacanciesPage;
         ProfilePage profilePage;
+        CompanyPage companyPage;
 
 
         public MainWindow(Аккаунт acc)
@@ -56,12 +57,15 @@ namespace Employment_agency
             InitializeComponent();
             currentAcc = acc;
             currentUser = acc.Соискатель.FirstOrDefault();
+
+            if (currentAcc.Тип_аккаунта == 1)
+                profilePage = new ProfilePage(acc);
+            else if (currentAcc.Тип_аккаунта == 2)
+                companyPage = new CompanyPage(acc);
+
             
-            profilePage = new ProfilePage(acc);
             vacanciesPage = new VacanciesPage();
             resumesPage = new ResumesPage();
-
-            MainFrame.Navigate(profilePage);
         }
 
         public void Navigate(Page page) 
@@ -76,7 +80,10 @@ namespace Employment_agency
 
         private void Click_imageProfile(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(profilePage);
+            if (currentAcc.Тип_аккаунта == 1)
+                MainFrame.Navigate(profilePage);
+            else if (currentAcc.Тип_аккаунта == 2)
+                MainFrame.Navigate(companyPage);
         }
 
         public static BitmapImage DeserializeImage(string value) // десериализация json строки из БД в изображение
@@ -96,6 +103,7 @@ namespace Employment_agency
         private void Click_labelResumes(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(resumesPage);
+
         }
     }
 

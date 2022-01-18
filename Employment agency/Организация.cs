@@ -21,9 +21,11 @@ namespace Employment_agency
         }
     
         public int Код_Организации { get; set; }
+        public int Код_аккаунта { get; set; }
         public string Название { get; set; }
         public string Номер_телефона { get; set; }
-        public int Код_аккаунта { get; set; }
+        public string Адрес { get; set; }
+        public string Описание { get; set; }
     
         public virtual Аккаунт Аккаунт { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

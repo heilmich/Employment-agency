@@ -26,13 +26,20 @@ namespace Employment_agency
             InitializeComponent();
             currentUser = acc.Соискатель.FirstOrDefault();
             this.DataContext = currentUser;
-            lvResume.ItemsSource = currentUser.Резюме;
+            Update();
 
+        }
+
+        public void Update() 
+        {
+            lvResume.ItemsSource = currentUser.Резюме.ToList();
         }
 
         private void Click_addResume(object sender, RoutedEventArgs e)
         {
-            
+            AddResumeWindow addResumeWindow = new AddResumeWindow(currentUser);
+            addResumeWindow.ShowDialog();
+            Update();
         }
     }
 }

@@ -15,12 +15,13 @@ namespace Employment_agency
     public partial class Вакансия
     {
         public int Код_вакансии { get; set; }
+        public int Код_организации { get; set; }
         public string Название { get; set; }
         public string Должность { get; set; }
         public decimal Базовый_оклад { get; set; }
         public string Описание { get; set; }
         public string Требование { get; set; }
-        public int Код_организации { get; set; }
+        public string Адрес { get; set; }
     
         public virtual Организация Организация { get; set; }
     }

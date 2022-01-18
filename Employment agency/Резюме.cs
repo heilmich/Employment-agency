@@ -16,7 +16,6 @@ namespace Employment_agency
     {
         public int Код_резюме { get; set; }
         public string Желаемая_должность { get; set; }
-        public string Образование { get; set; }
         public string Последнее_место_работы { get; set; }
         public int Стаж_работы { get; set; }
         public string О_себе { get; set; }

@@ -23,6 +23,11 @@ namespace Employment_agency
         public ResumesPage()
         {
             InitializeComponent();
+            Update();
+        }
+
+        public void Update()
+        {
             lvResumes.ItemsSource = Entities.GetContext().Резюме.ToList();
         }
     }

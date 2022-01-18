@@ -24,8 +24,8 @@ namespace Employment_agency
         public int Код_аккаунта { get; set; }
         public string Логин { get; set; }
         public string Пароль { get; set; }
-        public Nullable<int> Тип_аккаунта { get; set; }
         public string Фотография { get; set; }
+        public Nullable<int> Тип_аккаунта { get; set; }
     
         public virtual Тип_аккаунта Тип_аккаунта1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

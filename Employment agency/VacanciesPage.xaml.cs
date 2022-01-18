@@ -31,8 +31,13 @@ namespace Employment_agency
         public VacanciesPage()
         {
             InitializeComponent();
-            lvVacancies.ItemsSource = Entities.GetContext().Вакансия.ToList();
+            Update();
             
+        }
+
+        public void Update()
+        {
+            lvVacancies.ItemsSource = Entities.GetContext().Вакансия.ToList();
         }
     }
 }
