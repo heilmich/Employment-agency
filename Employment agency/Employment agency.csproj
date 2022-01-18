@@ -94,12 +94,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PageInfo.cs" />
     <Compile Include="ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResumesPage.xaml.cs">
       <DependentUpon>ResumesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SortItem.cs" />
     <Compile Include="VacanciesPage.xaml.cs">
       <DependentUpon>VacanciesPage.xaml</DependentUpon>
     </Compile>

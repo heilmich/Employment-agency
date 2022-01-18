@@ -35,15 +35,15 @@
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="tbMinZP" Margin="7,0" Grid.Column="0" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
+            <TextBox Name="tbMinZP" ToolTip="Минимальная зарплата" Margin="7,0" Grid.Column="0" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
                 0
             </TextBox>
             <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 -
             </Label>
-            <TextBox Name="tbMaxZP" Margin="7,0" Grid.Column="2" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
+            <TextBox Name="tbMaxZP" ToolTip="Максимальная зарплата" Margin="7,0" Grid.Column="2" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
                 99999
-            </TextBox>
+            </TextBox>  
             
         </Grid>
         <ComboBox Margin="20,0,0,0" Grid.Column="4" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
@@ -65,12 +65,32 @@
                             </Grid.ColumnDefinitions>
                             
                             <StackPanel VerticalAlignment="Top">
-                                <Image Source="{Binding Организация.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}" MaxHeight="150"/>
+                                <Image Source="{Binding Организация.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}"  Height="80" Stretch="Uniform"/>
                                 <TextBlock Text="{Binding Организация.Название}" TextWrapping="Wrap" FontSize="12"/>
+                                <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
+                                    <Run Text="{Binding Организация.Номер_телефона}"/>
+                                </TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Name="spVacancy" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Название}" TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding Описание}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Название}" TextWrapping="Wrap" FontSize="15" Margin="0,0,0,10"/>
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="Должность:"/>
+                                    <Run Text="{Binding Должность}"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="Заработная плата:"/>
+                                    <Run Text="{Binding Базовый_оклад}"/>
+                                    <Run Text="рублей"/>
+                                </TextBlock>
+                                <TextBlock Text="{Binding Описание}" TextWrapping="Wrap"  Margin="0,5,0,0"/>
+                                <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
+                                    <Run Text="Требования: "/>
+                                    <Run Text="{Binding Требование}"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
+                                    <Run Text="Адрес: "/>
+                                    <Run Text="{Binding Адрес}"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                         
