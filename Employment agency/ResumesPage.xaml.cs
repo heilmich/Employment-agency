@@ -118,5 +118,11 @@ namespace Employment_agency
             Update();
 
         }
+
+        private void Search_Click(object sender, MouseButtonEventArgs e)
+        {
+            searchQuery = search_field.Text;
+            Update();
+        }
     }
 }

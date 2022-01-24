@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Employment_agency"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ResumesPage">
+      Title="ResumesPage" FontSize="14">
     
     <Page.Resources>
         <Style x:Key="PageLabel" TargetType="TextBlock">
@@ -28,26 +28,24 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.14*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.14*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Name="search_field" KeyDown="Search_field_KeyDown" Grid.ColumnSpan="2" Margin="0,0,20,0" Grid.Column="1" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14" ToolTip="Для поиска нажмите ENTER">
-            Поиск
-        </TextBox>
-        <Grid Grid.Column="3" Grid.ColumnSpan="2" >
+
+        <Grid HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Center" Height="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="Auto" MinWidth="40"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
-
+            <Image MouseLeftButtonUp="Search_Click" HorizontalAlignment="Left" Source="search.ico" Height="30"/>
+            <TextBox Name="search_field" KeyDown="Search_field_KeyDown" Width="Auto" Grid.Column="1" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14" ToolTip="Для поиска нажмите ENTER">
+            </TextBox>
         </Grid>
-        <ComboBox Name="sortCB" SelectionChanged="SortChanged" Margin="20,0,0,0" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
+        <ComboBox Name="sortCB" SelectedIndex="0" SelectionChanged="SortChanged" Margin="20,0,0,0" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <ComboBoxItem Content="{Binding SortTitle}"></ComboBoxItem>
@@ -61,40 +59,39 @@
                     <Border Width="Auto" Padding="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" >
                         <Grid Width="Auto">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="100" Width="1.5*"/>
+                                <ColumnDefinition MinWidth="100" Width="1.2*"/>
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition MinWidth="50"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel VerticalAlignment="Top">
                                 <Image Source="{Binding Соискатель.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}" Height="80" Stretch="Uniform"/>
-                                <TextBlock TextWrapping="Wrap" FontSize="12">
-                                    <Run Text="{Binding Соискатель.Фамилия}"/>
-                                    <Run Text="{Binding Соискатель.Имя}"/>
-                                    <Run Text="{Binding Соискатель.Возраст}"/>
+                                <TextBlock TextWrapping="Wrap" FontSize="12" HorizontalAlignment="Center">
+                                    <Run Text="{Binding Соискатель.Фамилия}" FontWeight="SemiBold"/>
+                                    <Run Text="{Binding Соискатель.Имя}" FontWeight="SemiBold"/>
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Name="spVacancy" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Желаемая_должность}" FontSize="15" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Желаемая_должность}" FontSize="18" TextWrapping="Wrap" Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding О_себе}" TextWrapping="Wrap"/>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Образование:"/>
+                                    <Run Text="Образование:" FontWeight="Medium"/>
                                     <Run Text="{Binding Соискатель.Образование}"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Стаж работы:"/>
+                                    <Run Text="Стаж работы:" FontWeight="Medium"/>
                                     <Run Text="{Binding Стаж_работы}"/>
                                     <Run Text="месяцев"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Последнее место работы:"/>
+                                    <Run Text="Последнее место работы:" FontWeight="Medium"/>
                                     <Run Text="{Binding Последнее_место_работы}"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Адрес:"/>
+                                    <Run Text="Адрес:" FontWeight="Medium"/>
                                     <Run Text="{Binding Соискатель.Адрес}"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Номер телефона:"/>
+                                    <Run Text="Номер телефона:" FontWeight="Medium"/>
                                     <Run Text="{Binding Соискатель.Номер_телефона}"/>
                                 </TextBlock>
                             </StackPanel>
@@ -105,12 +102,12 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="Margin" Value="10"></Setter>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <StackPanel Grid.Row="3" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="3" Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Name="prevPage" Style="{StaticResource PageLabel}" Text="&lt;" MouseLeftButtonDown="PrevPageClick"></TextBlock>
             <StackPanel Name="pageList" Orientation="Horizontal">
 

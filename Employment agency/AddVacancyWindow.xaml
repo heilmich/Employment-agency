@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employment_agency"
         mc:Ignorable="d"
-        Title="AddVacancyWindow" Height="350" Width="350">
+        Title="Добавить вакансию" Height="350" Width="350">
 
     <Window.Resources>
         <Style TargetType="TextBlock">

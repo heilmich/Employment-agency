@@ -4,10 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Employment_agency"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"  
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="VacanciesPage">
+      Title="VacanciesPage"
+      FontSize="14">
     <Page.Resources>
+        <Style x:Key="PageLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="7"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#43DCFE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <local:ImageConverter x:Key="ImageConverter"/>
     </Page.Resources>
 
@@ -19,17 +29,24 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2.5*"/>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Name="search_field" Margin="20,0" Grid.Column="1" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14" ToolTip="Для поиска нажмите ENTER">
-            Поиск
-        </TextBox>
-        <Grid Grid.Column="2" Grid.ColumnSpan="2" >
+        <Grid HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Center" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="40"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image  HorizontalAlignment="Left" Source="search.ico" Height="30" MouseLeftButtonUp="Search_Click"/>
+            <TextBox Name="search_field" Width="Auto" Grid.Column="1" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14" ToolTip="Для поиска нажмите ENTER" KeyDown="Search_field_KeyDown">
+            </TextBox>
+        </Grid>
+        
+        <Grid Margin="10,0" Grid.Column="2" Grid.ColumnSpan="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.2*"/>
@@ -46,11 +63,12 @@
             </TextBox>  
             
         </Grid>
-        <ComboBox Margin="20,0,0,0" Grid.Column="4" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
-            
-        </ComboBox>
-        <ComboBox Margin="20,0,0,0" Grid.Column="5" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
-
+        <ComboBox Name="sortCB" SelectedIndex="0" SelectionChanged="SortChanged" Margin="0,0,0,0" Grid.Column="5" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <ComboBoxItem Content="{Binding SortTitle}"></ComboBoxItem>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <ListView Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
@@ -59,36 +77,36 @@
                     <Border Width="Auto" Padding="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" >
                         <Grid Width="Auto">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="100" Width="1.5*"/>
+                                <ColumnDefinition MinWidth="130" Width="1.2*"/>
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition MinWidth="50"/>
                             </Grid.ColumnDefinitions>
                             
                             <StackPanel VerticalAlignment="Top">
                                 <Image Source="{Binding Организация.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}"  Height="80" Stretch="Uniform"/>
-                                <TextBlock Text="{Binding Организация.Название}" TextWrapping="Wrap" FontSize="12"/>
-                                <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
-                                    <Run Text="{Binding Организация.Номер_телефона}"/>
+                                <TextBlock Text="{Binding Организация.Название}" HorizontalAlignment="Center" FontWeight="SemiBold" TextWrapping="Wrap" FontSize="12"/>
+                                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0">
+                                    <Run FontWeight="SemiBold" Text="{Binding Организация.Номер_телефона}"/>
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Name="spVacancy" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Название}" TextWrapping="Wrap" FontSize="15" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Название}" TextWrapping="Wrap" FontSize="18"  Margin="0,0,0,10"/>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Должность:"/>
+                                    <Run Text="Должность:" FontWeight="Medium"/>
                                     <Run Text="{Binding Должность}"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                    <Run Text="Заработная плата:"/>
+                                    <Run Text="Заработная плата:" FontWeight="Medium"/>
                                     <Run Text="{Binding Базовый_оклад}"/>
                                     <Run Text="рублей"/>
                                 </TextBlock>
                                 <TextBlock Text="{Binding Описание}" TextWrapping="Wrap"  Margin="0,5,0,0"/>
                                 <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
-                                    <Run Text="Требования: "/>
+                                    <Run Text="Требования: " FontWeight="Medium"/>
                                     <Run Text="{Binding Требование}"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
-                                    <Run Text="Адрес: "/>
+                                    <Run Text="Адрес: " FontWeight="Medium"/>
                                     <Run Text="{Binding Адрес}"/>
                                 </TextBlock>
                             </StackPanel>
@@ -100,9 +118,16 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="Margin" Value="10"></Setter>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <StackPanel Grid.Row="3" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <TextBlock Name="prevPage" Style="{StaticResource PageLabel}" Text="&lt;" MouseLeftButtonDown="PrevPageClick"></TextBlock>
+            <StackPanel Name="pageList" Orientation="Horizontal">
+
+            </StackPanel>
+            <TextBlock Name="nextPage" Style="{StaticResource PageLabel}" Text=">" MouseLeftButtonDown="NextPageClick"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

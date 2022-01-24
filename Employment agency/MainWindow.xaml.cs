@@ -59,9 +59,15 @@ namespace Employment_agency
             currentUser = acc.Соискатель.FirstOrDefault();
 
             if (currentAcc.Тип_аккаунта == 1)
+            {
                 profilePage = new ProfilePage(acc);
+                MainFrame.Navigate(profilePage);
+            }
             else if (currentAcc.Тип_аккаунта == 2)
+            {
                 companyPage = new CompanyPage(acc);
+                MainFrame.Navigate(companyPage);
+            }
 
             
             vacanciesPage = new VacanciesPage();

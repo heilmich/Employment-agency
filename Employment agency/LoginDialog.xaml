@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employment_agency"
         mc:Ignorable="d"
-        Title="LoginDialog" Height="450" Width="800" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
-    <Grid>
+        Title="Поиск работы" Icon="logo.png" MinHeight="250" MinWidth="350" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <Grid Background="#e1f5fe">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock>
@@ -20,11 +20,11 @@
                 <TextBlock>
                     Пароль
                 </TextBlock>
-                <TextBox MinWidth="100" Margin="15,0" Name="password">
+                <PasswordBox  MinWidth="100" Margin="15,0" Name="password">
 
-                </TextBox>
+                </PasswordBox>
             </StackPanel>
-            <Button Click="btn_SignIn">
+            <Button  Click="btn_SignIn" Background="Snow" FontSize="15" BorderBrush="Gray" BorderThickness="1">
                 Войти
             </Button>
         </StackPanel>

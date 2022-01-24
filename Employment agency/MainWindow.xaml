@@ -5,24 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employment_agency"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" BorderBrush="White" FontFamily="Roboto">
-    <Grid Background="#FFE6E6E6">
+        Title="Поиск работы" Icon="logo.png" Height="450" Width="800" BorderBrush="White" FontSize="16" FontFamily="Roboto">
+    <Grid Background="#e1f5fe">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="65"/>
             <RowDefinition Height="12*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Label FontSize="18" Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#3C4247">Бюро трудоустройств</Label>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Label Content="Резюме" Foreground="#3C4247" MouseLeftButtonUp="Click_labelResumes" />
-            <Label Content="Вакансии" Foreground="#3C4247" MouseLeftButtonUp="Click_labelVacancies" />
-            <Image Source="placeholderuser.png" Height="25" MouseLeftButtonUp="Click_imageProfile"/>
+            <Label Margin="0,0,15,0" FontSize="18" Content="Резюме" FontWeight="SemiBold" Foreground="#3C4247" MouseLeftButtonUp="Click_labelResumes" />
+            <Label Margin="0,0,15,0" FontSize="18" Content="Вакансии" FontWeight="SemiBold" Foreground="#3C4247" MouseLeftButtonUp="Click_labelVacancies" />
+            <Image Source="placeholderuser.png" Height="32" MouseLeftButtonUp="Click_imageProfile"/>
         </StackPanel>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1">
+        <Frame  Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1">
             
         </Frame>
     </Grid>

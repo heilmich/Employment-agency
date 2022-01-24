@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employment_agency"
         mc:Ignorable="d"
-        Title="AddResumeWindow" Height="300" Width="350">
+        Title="Добавить резюме" Height="300" Width="350">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>

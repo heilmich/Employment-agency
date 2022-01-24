@@ -27,7 +27,7 @@ namespace Employment_agency
         private void btn_SignIn(object sender, RoutedEventArgs e)
         {
             Authorization authorization = new Authorization();
-            Аккаунт user = (Аккаунт)authorization.SignIn(login.Text, password.Text, Entities.GetContext());
+            Аккаунт user = (Аккаунт)authorization.SignIn(login.Text, password.Password, Entities.GetContext());
 
             if (user == null) return;
 
