@@ -71,7 +71,7 @@ namespace Employment_agency
             pageList.Children.Clear(); // чистим список элементов
 
             // расчёт кол-ва элементов в запросе
-            pageInfo.totalItems = Entities.GetContext().Резюме.Count();
+            pageInfo.totalItems = Entities.GetContext().Вакансия.Count();
 
 
             for (int i = pageInfo.pageIndex; i <= pageInfo.totalPages; i++) // рассчёт кол-ва страниц в списке страниц

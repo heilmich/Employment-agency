@@ -119,6 +119,11 @@ namespace Employment_agency
                 fs.Read(array, 0, array.Length);
 
                 pic = JsonSerializer.Serialize(array);
+                if (pic == null)
+                {
+                    MessageBox.Show("Файл не выбран");
+                    return;
+                }
                 currentAcc.Фотография = pic;
                 Entities.GetContext().SaveChanges();
             }
