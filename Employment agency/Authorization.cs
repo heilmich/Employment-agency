@@ -94,9 +94,10 @@ namespace Employment_agency
             if (SignCheck(password, login) == false) return null;
 
             Аккаунт user = db.Аккаунт.Where( p => p.Логин == login && p.Пароль == password).FirstOrDefault();
-            if (user != null) return user;              
+            if (user != null) return user;
 
             //Действие при неудачном входе
+            MessageBox.Show("Совпадения не найдены. Проверьте правильность введенных данных.");
             return null;
         }
 
