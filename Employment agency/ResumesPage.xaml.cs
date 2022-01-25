@@ -124,5 +124,12 @@ namespace Employment_agency
             searchQuery = search_field.Text;
             Update();
         }
+
+        private void Click_User(object sender, MouseButtonEventArgs e)
+        {
+            Соискатель user = ((Резюме)lvResumes.SelectedItem).Соискатель;
+            ProfilePage profilePage = new ProfilePage(user);
+            MainWindow.currentWindow.Navigate(profilePage);
+        }
     }
 }

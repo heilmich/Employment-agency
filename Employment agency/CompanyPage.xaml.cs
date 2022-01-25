@@ -24,8 +24,23 @@ namespace Employment_agency
         public CompanyPage(Аккаунт acc)
         {
             InitializeComponent();
+            
             currentCompany = acc.Организация.FirstOrDefault();
             this.DataContext = currentCompany;
+
+            Update();
+        }
+
+        public CompanyPage(Организация comp) 
+        {
+            InitializeComponent();
+
+            currentCompany = comp;
+            this.DataContext = currentCompany;
+
+            btnEditPhoto.Visibility = Visibility.Collapsed;
+            btnAddVacancy.Visibility = Visibility.Collapsed;
+
             Update();
         }
 

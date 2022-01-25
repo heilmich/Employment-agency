@@ -44,8 +44,9 @@ namespace Employment_agency
     }
     public partial class MainWindow : Window
     {
-        public Аккаунт currentAcc = new Аккаунт();
-        public Соискатель currentUser = new Соискатель();
+        public static Аккаунт currentAcc = new Аккаунт();
+        public static Соискатель currentUser = new Соискатель();
+        public static MainWindow currentWindow;
         ResumesPage resumesPage;
         VacanciesPage vacanciesPage;
         ProfilePage profilePage;
@@ -57,6 +58,7 @@ namespace Employment_agency
             InitializeComponent();
             currentAcc = acc;
             currentUser = acc.Соискатель.FirstOrDefault();
+            currentWindow = this;
 
             if (currentAcc.Тип_аккаунта == 1)
             {
@@ -106,11 +108,29 @@ namespace Employment_agency
             return img;
         }
 
+        public static void Serialize(string path)
+        {
+            string pic;
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+
+            using (FileStream fs = File.OpenRead(path))
+            {
+                byte[] array = new byte[fs.Length];
+                fs.Read(array, 0, array.Length);
+
+                pic = JsonSerializer.Serialize(array);
+                currentAcc.Фотография = pic;
+                Entities.GetContext().SaveChanges();
+            }
+        }
+
         private void Click_labelResumes(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(resumesPage);
 
         }
+
+
     }
 
 

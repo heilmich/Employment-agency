@@ -82,7 +82,7 @@
                                 <ColumnDefinition MinWidth="50"/>
                             </Grid.ColumnDefinitions>
                             
-                            <StackPanel VerticalAlignment="Top">
+                            <StackPanel VerticalAlignment="Top" MouseLeftButtonUp="Click_Company">
                                 <Image Source="{Binding Организация.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}"  Height="80" Stretch="Uniform"/>
                                 <TextBlock Text="{Binding Организация.Название}" HorizontalAlignment="Center" FontWeight="SemiBold" TextWrapping="Wrap" FontSize="12"/>
                                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0">

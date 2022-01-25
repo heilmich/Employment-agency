@@ -39,6 +39,7 @@ namespace Employment_agency
             new SortItem("DESC", "Вакансия.Базовый_оклад", "По убыванию: оклад")
         };
 
+
         public VacanciesPage()
         {
             InitializeComponent();
@@ -128,6 +129,12 @@ namespace Employment_agency
         {
             searchQuery = search_field.Text;
             Update();
+        }
+
+        private void Click_Company(object sender, MouseButtonEventArgs e)
+        {
+            CompanyPage companyPage = new CompanyPage(((Вакансия)(lvVacancies.SelectedItem)).Организация);
+            MainWindow.currentWindow.Navigate(companyPage);
         }
     }
 }

@@ -7,48 +7,50 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CompanyPage">
+    
     <Page.Resources>
         <local:ImageConverter x:Key="ImageConverter"/>
     </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.01*"/>
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="0.7*"/>
-            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="0.01*"/>
+            <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="10"/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Top" Margin="12" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Top" Margin="5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <StackPanel Name="spPhoto" Margin="7, 10" VerticalAlignment="Top">
                 <Image Source="{Binding Аккаунт.Фотография, Converter={StaticResource ImageConverter}}" MinHeight="100" Height="150" Margin="0,0,0,15">
 
                 </Image>
                 <StackPanel Orientation="Vertical">
-                    <Button Width="120" Margin="0,0,0,10" Style="{DynamicResource ButtonStyle}" MinHeight="25">
-                        Очистить
-                    </Button>
-                    <Button Width="120" Style="{DynamicResource ButtonStyle}" MinHeight="25">
+                    <Button Name="btnEditPhoto" Width="120" Style="{DynamicResource ButtonStyle}" MinHeight="25">
                         Редактировать
                     </Button>
                     
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Top" MinHeight="200" Margin="12" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
-            <StackPanel Name="spUser" Margin="7, 10">
-                <TextBlock Text="{Binding Название}" FontSize="18" ></TextBlock>
-                <TextBlock Text="{Binding Номер_телефона}" FontSize="18" Margin="0,10,0,0"></TextBlock>
-                <TextBlock Text="{Binding Описание}" FontSize="18" Margin="0,10,0,0"></TextBlock>
-            </StackPanel>
+        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Top" MinHeight="200" Margin="5" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
+            <ScrollViewer Margin="0,0,5,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="spUser" Margin="7, 10">
+                    <TextBlock Text="{Binding Название}" FontSize="18" HorizontalAlignment="Center" ></TextBlock>
+                    <TextBlock Text="{Binding Номер_телефона}" FontSize="16" Margin="0,10,0,0"></TextBlock>
+                    <TextBlock Text="{Binding Адрес}" FontSize="16" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
+                    <TextBlock Text="{Binding Описание}" TextWrapping="Wrap" FontSize="12" Margin="0,10,0,0"></TextBlock>
+                </StackPanel>
+                
+            </ScrollViewer>
         </Border>
-        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Stretch" Margin="12" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2">
+        <Border Style="{DynamicResource BorderStyle}" VerticalAlignment="Stretch" Margin="5" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -74,7 +76,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button Grid.Row="2" Style="{DynamicResource ButtonStyle}" Height="22" Content="Добавить" Width="120" Click="Click_addVacancy"/>
+                <Button Name="btnAddVacancy" Grid.Row="2" Style="{DynamicResource ButtonStyle}" Height="22" Content="Добавить" Width="120" Click="Click_addVacancy"/>
             </Grid>
         </Border>
     </Grid>

@@ -63,7 +63,7 @@
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition MinWidth="50"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel VerticalAlignment="Top">
+                            <StackPanel VerticalAlignment="Top" MouseLeftButtonUp="Click_User">
                                 <Image Source="{Binding Соискатель.Аккаунт.Фотография, Converter={StaticResource ImageConverter}}" Height="80" Stretch="Uniform"/>
                                 <TextBlock TextWrapping="Wrap" FontSize="12" HorizontalAlignment="Center">
                                     <Run Text="{Binding Соискатель.Фамилия}" FontWeight="SemiBold"/>

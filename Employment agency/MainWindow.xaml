@@ -9,13 +9,13 @@
     <Grid Background="#e1f5fe">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="25*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="12*"/>
-            <RowDefinition/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label FontSize="18" Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#3C4247">Бюро трудоустройств</Label>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
