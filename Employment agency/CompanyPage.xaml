@@ -32,7 +32,7 @@
 
                 </Image>
                 <StackPanel Orientation="Vertical">
-                    <Button Name="btnEditPhoto" Width="120" Style="{DynamicResource ButtonStyle}" MinHeight="25">
+                    <Button Name="btnEditPhoto" Width="120" Style="{DynamicResource ButtonStyle}" MinHeight="25" Click="Click_btnEditPhoto">
                         Редактировать
                     </Button>
                     

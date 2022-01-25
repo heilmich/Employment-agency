@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,18 @@ namespace Employment_agency
             AddVacancyWindow addVacancyWindow = new AddVacancyWindow(currentCompany);
             addVacancyWindow.ShowDialog();
             Update();
+        }
+
+        private void Click_btnEditPhoto(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg; *.png; *.jpeg";
+            openFileDialog.Multiselect = false;
+            openFileDialog.Title = "Выберите изображение";
+            openFileDialog.ShowDialog();
+            if (openFileDialog.FileName != null)
+                MainWindow.Serialize(openFileDialog.FileName);
+            else MessageBox.Show("Вы не выбрали изображение");
         }
     }
 }
