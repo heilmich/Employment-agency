@@ -57,14 +57,24 @@ namespace Employment_agency
 
         public ObservableCollection<Вакансия> TakeData()
         {
-            return new ObservableCollection<Вакансия>(Entities.GetContext().Вакансия.SqlQuery($"SELECT * FROM Вакансия " +
-                         $"JOIN Организация ON Вакансия.Код_организации = Организация.Код_Организации " +
-                         $"WHERE ( Вакансия.Должность LIKE N'%{searchQuery}%' OR Вакансия.Адрес LIKE N'%{searchQuery}%') " +
-                         $" AND ( Вакансия.Базовый_оклад >= {tbMinZP.Text} AND Вакансия.Базовый_оклад <= {tbMaxZP.Text} ) " +
-                         $"ORDER BY {currentSort.SortProperty} {currentSort.SortDir} " +
-                         $"OFFSET {(pageInfo.pageIndex - 1) * pageInfo.pageSize} ROWS " +
-                         $"FETCH NEXT {pageInfo.pageSize} ROWS ONLY; "));
+            try
+            {
+                return new ObservableCollection<Вакансия>(Entities.GetContext().Вакансия.SqlQuery($"SELECT * FROM Вакансия " +
+                             $"JOIN Организация ON Вакансия.Код_организации = Организация.Код_Организации " +
+                             $"WHERE ( Вакансия.Должность LIKE N'%{searchQuery}%' OR Вакансия.Адрес LIKE N'%{searchQuery}%') " +
+                             $" AND ( Вакансия.Базовый_оклад >= {tbMinZP.Text} AND Вакансия.Базовый_оклад <= {tbMaxZP.Text} ) " +
+                             $"ORDER BY {currentSort.SortProperty} {currentSort.SortDir} " +
+                             $"OFFSET {(pageInfo.pageIndex - 1) * pageInfo.pageSize} ROWS " +
+                             $"FETCH NEXT {pageInfo.pageSize} ROWS ONLY; "));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка:\n" + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            
         }
+
 
         public void Pagination()    // функция разбивки на страницы
         {
