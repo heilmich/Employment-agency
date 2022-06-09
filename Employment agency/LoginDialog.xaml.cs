@@ -31,8 +31,39 @@ namespace Employment_agency
 
             if (user == null) return;
 
-            MainWindow mainWindow = new MainWindow(user);
-            mainWindow.Show();
+            MainWindow.currentAcc = user;
+           
+            this.Close();
+        }
+
+
+        private void btn_SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            Аккаунт acc = new Аккаунт();
+            Организация org = new Организация();
+
+            acc.Тип_аккаунта = 2;
+            acc.Логин = loginSignUp.Text;
+            acc.Пароль = passwordSignUp.Password;
+
+            org.Название = titleSignUp.Text;
+            org.Номер_телефона = phoneSignUp.Text;
+
+            Entities.GetContext().Аккаунт.Add(acc);
+            Entities.GetContext().SaveChanges();
+
+            org.Код_аккаунта = acc.Код_аккаунта;
+            Entities.GetContext().Организация.Add(org);
+            Entities.GetContext().SaveChangesAsync();
+
+            MessageBox.Show("Аккаунт создан");
+
+            Authorization authorization = new Authorization();
+            Аккаунт user = (Аккаунт)authorization.SignIn(acc.Логин, acc.Пароль, Entities.GetContext());
+            if (user == null) return;
+
+            MainWindow.currentAcc = user;
+
             this.Close();
         }
     }

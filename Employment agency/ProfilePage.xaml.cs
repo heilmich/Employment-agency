@@ -39,7 +39,6 @@ namespace Employment_agency
             this.DataContext = currentUser;
 
             btnEditPhoto.Visibility = Visibility.Collapsed;
-            btnAddResume.Visibility = Visibility.Collapsed;
 
             Update();
 
@@ -50,12 +49,6 @@ namespace Employment_agency
             lvResume.ItemsSource = currentUser.Резюме.ToList();
         }
 
-        private void Click_addResume(object sender, RoutedEventArgs e)
-        {
-            AddResumeWindow addResumeWindow = new AddResumeWindow(currentUser);
-            addResumeWindow.ShowDialog();
-            Update();
-        }
 
         private void Click_btnEditPhoto(object sender, RoutedEventArgs e)
         {

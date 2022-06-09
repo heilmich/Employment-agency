@@ -46,6 +46,7 @@
                     <TextBlock Text="{Binding Номер_телефона}" FontSize="16" Margin="0,10,0,0"></TextBlock>
                     <TextBlock Text="{Binding Адрес}" FontSize="16" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
                     <TextBlock Text="{Binding Описание}" TextWrapping="Wrap" FontSize="12" Margin="0,10,0,0"></TextBlock>
+                    <Button Style="{DynamicResource ButtonStyle}" x:Name="EditInfoBTN" Content="Редактировать" Margin="0,10,0,0" Click="EditInfoBTN_Click"/>
                 </StackPanel>
                 
             </ScrollViewer>

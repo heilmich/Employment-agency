@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employment_agency"
         mc:Ignorable="d"
-        Title="Поиск работы" Icon="logo.png" MinHeight="250" MinWidth="350" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="Поиск работы" Icon="logo.png" MinHeight="250" MinWidth="500" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <Border Padding="30,15" Background="#e1f5fe">
+        
     <Grid Background="#e1f5fe">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Вход" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,15"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock>
                     Логин
                 </TextBlock>
@@ -17,6 +25,7 @@
                 </TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15">
+                
                 <TextBlock>
                     Пароль
                 </TextBlock>
@@ -24,9 +33,50 @@
 
                 </PasswordBox>
             </StackPanel>
-            <Button  Click="btn_SignIn" Background="Snow" FontSize="15" BorderBrush="Gray" BorderThickness="1">
+            <Button Margin="20,0" Style="{DynamicResource ButtonStyle}" Click="btn_SignIn" Background="Snow" FontSize="15" BorderBrush="Gray" BorderThickness="1">
                 Войти
             </Button>
         </StackPanel>
-    </Grid>
+        <Border HorizontalAlignment="Center" BorderBrush="Gray" Width="1" BorderThickness="1" Grid.Column="1"/>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Регистрация" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,15"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,0">
+                    <TextBlock>
+            Название
+                    </TextBlock>
+                    <TextBox MinWidth="100" Margin="15,0" Name="titleSignUp">
+
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <TextBlock>
+            Номер телефона
+                    </TextBlock>
+                    <TextBox MinWidth="100" Margin="15,0" Name="phoneSignUp">
+
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <TextBlock>
+            Логин
+                    </TextBlock>
+                    <TextBox MinWidth="100" Margin="15,0" Name="loginSignUp">
+
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,15">
+                    <TextBlock>
+            Пароль
+                    </TextBlock>
+                    <PasswordBox  MinWidth="100" Margin="15,0" Name="passwordSignUp">
+
+                    </PasswordBox>
+                </StackPanel>
+                <Button Margin="30,0" Style="{DynamicResource ButtonStyle}" Click="btn_SignUp_Click" x:Name="btn_SignUp" Background="Snow" FontSize="15" BorderBrush="Gray" BorderThickness="1">
+                    Регистрация
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

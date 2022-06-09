@@ -44,22 +44,20 @@ namespace Employment_agency
     }
     public partial class MainWindow : Window
     {
-        public static Аккаунт currentAcc = new Аккаунт();
-        public static Соискатель currentUser = new Соискатель();
+        public static Аккаунт currentAcc = null;
         public static MainWindow currentWindow;
-        ResumesPage resumesPage;
+        
         VacanciesPage vacanciesPage;
-        ProfilePage profilePage;
         CompanyPage companyPage;
 
 
-        public MainWindow(Аккаунт acc)
+        public MainWindow()
         {
             InitializeComponent();
-            currentAcc = acc;
-            currentUser = acc.Соискатель.FirstOrDefault();
+            //currentAcc = acc;
+            //currentUser = acc.Соискатель.FirstOrDefault();
             currentWindow = this;
-
+            /*
             if (currentAcc.Тип_аккаунта == 1)
             {
                 profilePage = new ProfilePage(acc);
@@ -69,11 +67,12 @@ namespace Employment_agency
             {
                 companyPage = new CompanyPage(acc);
                 MainFrame.Navigate(companyPage);
-            }
+            }*/
 
             
             vacanciesPage = new VacanciesPage();
-            resumesPage = new ResumesPage();
+            MainFrame.Navigate(vacanciesPage);
+            
         }
 
         public void Navigate(Page page) 
@@ -87,16 +86,22 @@ namespace Employment_agency
         }
 
         private void Click_imageProfile(object sender, MouseButtonEventArgs e)
-        {
-            if (currentAcc.Тип_аккаунта == 1)
-                MainFrame.Navigate(profilePage);
-            else if (currentAcc.Тип_аккаунта == 2)
+        {   
+            if (currentAcc == null) 
+            {
+                LoginDialog loginWindow = new LoginDialog();
+                loginWindow.Show();
+            }
+            else if (currentAcc.Тип_аккаунта == 2) 
+            {
+                companyPage = new CompanyPage(currentAcc);
                 MainFrame.Navigate(companyPage);
+            }
         }
 
         public static BitmapImage DeserializeImage(string value) // десериализация json строки из БД в изображение
         {
-            byte[] array = System.Convert.FromBase64String(JsonSerializer.Deserialize<string>((string)value));
+            byte[] array = Convert.FromBase64String(JsonSerializer.Deserialize<string>((string)value));
             MemoryStream ms = new MemoryStream(array, 0, array.Length);
             BitmapImage img = new BitmapImage();
 
@@ -111,6 +116,7 @@ namespace Employment_agency
         public static void Serialize(string path)
         {
             string pic;
+            if (String.IsNullOrEmpty(path)) return;
             DirectoryInfo dirInfo = new DirectoryInfo(path);
 
             using (FileStream fs = File.OpenRead(path))
@@ -129,11 +135,6 @@ namespace Employment_agency
             }
         }
 
-        private void Click_labelResumes(object sender, MouseButtonEventArgs e)
-        {
-            MainFrame.Navigate(resumesPage);
-
-        }
 
 
     }

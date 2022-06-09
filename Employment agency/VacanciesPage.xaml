@@ -41,7 +41,19 @@
                 <ColumnDefinition Width="Auto" MinWidth="40"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image  HorizontalAlignment="Left" Source="search.ico" Height="30" MouseLeftButtonUp="Search_Click"/>
+            <Image  HorizontalAlignment="Left" Source="search.ico" Height="30" MouseLeftButtonUp="Search_Click">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Opacity" Value="0.7"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
             <TextBox Name="search_field" Width="Auto" Grid.Column="1" VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" FontSize="14" ToolTip="Для поиска нажмите ENTER" KeyDown="Search_field_KeyDown">
             </TextBox>
         </Grid>
@@ -71,7 +83,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <ListView Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+        <ListView SelectionMode="Multiple" Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Width="Auto" Padding="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" >
@@ -122,6 +134,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <Button x:Name="PDFSaveBTN" Click="PDFSaveBTN_Click" Style="{DynamicResource ButtonStyle}" Content="Сохранить в PDF" Margin="0,7,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <StackPanel Grid.Row="3" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Name="prevPage" Style="{StaticResource PageLabel}" Text="&lt;" MouseLeftButtonDown="PrevPageClick"></TextBlock>
             <StackPanel Name="pageList" Orientation="Horizontal">

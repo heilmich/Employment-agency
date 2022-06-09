@@ -17,9 +17,8 @@
             <RowDefinition Height="12*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label FontSize="18" Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#3C4247">Бюро трудоустройств</Label>
+        <Label FontSize="18" Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#3C4247">Бюро трудоустройства</Label>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Label Margin="0,0,15,0" FontSize="18" Content="Резюме" FontWeight="SemiBold" Foreground="#3C4247" MouseLeftButtonUp="Click_labelResumes" />
             <Label Margin="0,0,15,0" FontSize="18" Content="Вакансии" FontWeight="SemiBold" Foreground="#3C4247" MouseLeftButtonUp="Click_labelVacancies" />
             <Image Source="placeholderuser.png" Height="32" MouseLeftButtonUp="Click_imageProfile"/>
         </StackPanel>

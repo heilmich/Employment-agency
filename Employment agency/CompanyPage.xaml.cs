@@ -41,7 +41,7 @@ namespace Employment_agency
 
             btnEditPhoto.Visibility = Visibility.Collapsed;
             btnAddVacancy.Visibility = Visibility.Collapsed;
-
+            EditInfoBTN.Visibility = Visibility.Collapsed;
             Update();
         }
 
@@ -67,6 +67,12 @@ namespace Employment_agency
             if (openFileDialog.FileName != null)
                 MainWindow.Serialize(openFileDialog.FileName);
             else MessageBox.Show("Вы не выбрали изображение");
+        }
+
+        private void EditInfoBTN_Click(object sender, RoutedEventArgs e)
+        {
+            EditCompanyWindow editCompanyWindow = new EditCompanyWindow(currentCompany);
+            editCompanyWindow.Show();
         }
     }
 }

@@ -16,10 +16,6 @@ namespace Employment_agency
     public partial class Entities : DbContext
     {
         private static Entities _context;
-        public Entities()
-            : base("name=Entities")
-        {
-        }
 
         public static Entities GetContext()
         {
@@ -28,7 +24,11 @@ namespace Employment_agency
 
             return _context;
         }
-
+        public Entities()
+            : base("name=Entities")
+        {
+        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -36,6 +36,7 @@ namespace Employment_agency
     
         public virtual DbSet<Аккаунт> Аккаунт { get; set; }
         public virtual DbSet<Вакансия> Вакансия { get; set; }
+        public virtual DbSet<Города> Города { get; set; }
         public virtual DbSet<Организация> Организация { get; set; }
         public virtual DbSet<Резюме> Резюме { get; set; }
         public virtual DbSet<Соискатель> Соискатель { get; set; }

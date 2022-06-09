@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище employmentofficeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище employmentofficeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Аккаунт">
           <Key>
             <PropertyRef Name="Код_аккаунта" />
@@ -28,6 +28,13 @@
           <Property Name="Требование" Type="nvarchar(max)" />
           <Property Name="Адрес" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="Код_города" />
+          </Key>
+          <Property Name="Код_города" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Город" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Организация">
           <Key>
             <PropertyRef Name="Код_Организации" />
@@ -44,11 +51,11 @@
             <PropertyRef Name="Код_резюме" />
           </Key>
           <Property Name="Код_резюме" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_соискателя" Type="int" Nullable="false" />
           <Property Name="Желаемая_должность" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Последнее_место_работы" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Стаж_работы" Type="int" Nullable="false" />
           <Property Name="О_себе" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Код_соискателя" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Соискатель">
           <Key>
@@ -134,6 +141,7 @@
         <EntityContainer Name="Хранилище employmentofficeModelContainer">
           <EntitySet Name="Аккаунт" EntityType="Self.Аккаунт" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Вакансия" EntityType="Self.Вакансия" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Города" EntityType="Self.Города" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Организация" EntityType="Self.Организация" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Резюме" EntityType="Self.Резюме" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Соискатель" EntityType="Self.Соискатель" Schema="dbo" store:Type="Tables" />
@@ -159,7 +167,8 @@
             <End Role="Соискатель" EntitySet="Соискатель" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="employmentofficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -190,6 +199,13 @@
           <Property Name="Адрес" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Организация" Relationship="Self.FK_Вакансии_Организация" FromRole="Вакансия" ToRole="Организация" />
         </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="Код_города" />
+          </Key>
+          <Property Name="Код_города" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Город" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Организация">
           <Key>
             <PropertyRef Name="Код_Организации" />
@@ -208,11 +224,11 @@
             <PropertyRef Name="Код_резюме" />
           </Key>
           <Property Name="Код_резюме" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_соискателя" Type="Int32" Nullable="false" />
           <Property Name="Желаемая_должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Последнее_место_работы" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Стаж_работы" Type="Int32" Nullable="false" />
           <Property Name="О_себе" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Код_соискателя" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Соискатель" Relationship="Self.FK_Резюме_Соискатель" FromRole="Резюме" ToRole="Соискатель" />
         </EntityType>
         <EntityType Name="Соискатель">
@@ -302,6 +318,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Аккаунт" EntityType="Self.Аккаунт" />
           <EntitySet Name="Вакансия" EntityType="Self.Вакансия" />
+          <EntitySet Name="Города" EntityType="Self.Города" />
           <EntitySet Name="Организация" EntityType="Self.Организация" />
           <EntitySet Name="Резюме" EntityType="Self.Резюме" />
           <EntitySet Name="Соискатель" EntityType="Self.Соискатель" />
@@ -358,6 +375,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Города">
+            <EntityTypeMapping TypeName="employmentofficeModel.Города">
+              <MappingFragment StoreEntitySet="Города">
+                <ScalarProperty Name="Код_города" ColumnName="Код_города" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Организация">
             <EntityTypeMapping TypeName="employmentofficeModel.Организация">
               <MappingFragment StoreEntitySet="Организация">
@@ -374,11 +399,11 @@
             <EntityTypeMapping TypeName="employmentofficeModel.Резюме">
               <MappingFragment StoreEntitySet="Резюме">
                 <ScalarProperty Name="Код_резюме" ColumnName="Код_резюме" />
+                <ScalarProperty Name="Код_соискателя" ColumnName="Код_соискателя" />
                 <ScalarProperty Name="Желаемая_должность" ColumnName="Желаемая_должность" />
                 <ScalarProperty Name="Последнее_место_работы" ColumnName="Последнее_место_работы" />
                 <ScalarProperty Name="Стаж_работы" ColumnName="Стаж_работы" />
                 <ScalarProperty Name="О_себе" ColumnName="О_себе" />
-                <ScalarProperty Name="Код_соискателя" ColumnName="Код_соискателя" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

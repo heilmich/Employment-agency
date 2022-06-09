@@ -69,7 +69,6 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button Name="btnAddResume" Grid.Row="2" Style="{DynamicResource ButtonStyle}" Height="22" Content="Добавить" Width="120" Click="Click_addResume"/>
             </Grid>  
         </Border>
     </Grid>

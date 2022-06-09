@@ -19,6 +19,11 @@ using System.ComponentModel;
 using System.Text.Json;
 using System.Globalization;
 
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.Win32;
+
 namespace Employment_agency
 {
     /// <summary>
@@ -145,6 +150,74 @@ namespace Employment_agency
         {
             CompanyPage companyPage = new CompanyPage(((Вакансия)(lvVacancies.SelectedItem)).Организация);
             MainWindow.currentWindow.Navigate(companyPage);
+        }
+
+        private void PDFSaveBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Document document = new Document();
+
+            List<Вакансия> vacancies = new System.Collections.Generic.List<Вакансия>();
+            vacancies = lvVacancies.SelectedItems.Cast<Вакансия>().ToList();
+            if (vacancies == null || vacancies.Count == 0)
+            {
+                MessageBox.Show("Выберите вакансии");
+                return;
+            }
+
+            string docstr = null;
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PDF files (*.pdf)|*.pdf;";
+            sfd.Title = "Выберите папку для сохранения";
+            sfd.ShowDialog();
+            if (sfd.FileName == null || sfd.FileName == "") return;
+
+
+            using (var writer = PdfWriter.GetInstance(document, new FileStream(sfd.FileName, FileMode.Create)))
+            {
+                document.Open();
+
+
+
+                BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
+                foreach(var vacancy in vacancies) 
+                {
+                    var title = new Phrase("Название: " + vacancy.Название + "\n\n", font);
+                    document.Add(title);
+
+                    var role = new Phrase("Должность: " + vacancy.Должность + "\n\n", font);
+                    document.Add(role);
+
+                    var salary = new Phrase("Оклад: " + vacancy.Базовый_оклад + "\n\n", font);
+                    document.Add(salary);
+
+                    if (vacancy.Описание != null) 
+                    {
+                        var description = new Phrase("Описание: \n" + vacancy.Описание + "\n\n", font);
+                        document.Add(description);
+                    }
+
+                    if (vacancy.Требование != null)
+                    {
+                        var requirement = new Phrase("Требования: " + vacancy.Требование + "\n\n", font);
+                        document.Add(requirement);
+                    }
+
+                    if (vacancy.Адрес != null)
+                    {
+                        var adress = new Phrase("Адрес: " + vacancy.Адрес + "\n\n", font);
+                        document.Add(adress);
+                    }
+                    var linebreak = new Phrase("\n\n\n", font);
+                    document.Add(linebreak);
+                }
+
+                document.Add(new Phrase(""));
+                document.Close();
+
+                writer.Close();
+            }
         }
     }
 }
