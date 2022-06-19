@@ -37,6 +37,7 @@ namespace Employment_agency
         public PageInfo pageInfo = new PageInfo(10, 4, 0);      //объект информации о странице
         public string searchQuery;                              //поисковый запрос
         public SortItem currentSort;                            //объект сортировки
+        public CompanyPage currentCompanyPage;
         public List<SortItem> sortList = new List<SortItem>     // лист с объектами сортировки
         {
             new SortItem("DESC", "Вакансия.Код_вакансии", "Без сортировки"),
@@ -148,8 +149,8 @@ namespace Employment_agency
 
         private void Click_Company(object sender, MouseButtonEventArgs e)
         {
-            CompanyPage companyPage = new CompanyPage(((Вакансия)(lvVacancies.SelectedItem)).Организация);
-            MainWindow.currentWindow.Navigate(companyPage);
+            currentCompanyPage = new CompanyPage(((Вакансия)(lvVacancies.SelectedItem)).Организация);
+            MainWindow.currentWindow.Navigate(currentCompanyPage);
         }
 
         private void PDFSaveBTN_Click(object sender, RoutedEventArgs e)
@@ -163,8 +164,6 @@ namespace Employment_agency
                 MessageBox.Show("Выберите вакансии");
                 return;
             }
-
-            string docstr = null;
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "PDF files (*.pdf)|*.pdf;";

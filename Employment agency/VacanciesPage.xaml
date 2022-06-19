@@ -83,7 +83,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <ListView SelectionMode="Multiple" Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+        <ListView SelectionMode="Single" Name="lvVacancies" Style="{DynamicResource VacanciesStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Width="Auto" Padding="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" >
